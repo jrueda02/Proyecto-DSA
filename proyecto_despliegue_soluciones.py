@@ -28,3 +28,35 @@ for i in categorical_columns:
 num_columns = [col for col in df.columns if df[col].dtype == 'float64']
 df[num_columns].describe().T
 
+# Histogramas
+df[num_columns].hist(bins=20, figsize=(12, 8))
+plt.suptitle("Histogramas de columnas de tipo numérico")
+plt.show()
+
+for i in num_columns:
+  df.boxplot(column=[i], by=['NObeyesdad'])
+  fig = plt.gcf()
+  fig.set_size_inches(15, 5)
+  plt.show()
+
+
+# Gráfico de dispersión por tipo de obesidad
+plt.figure(figsize=(15, 5))
+for i in num_columns:
+    for obesity_type in df['NObeyesdad'].unique():
+        subset = df[df['NObeyesdad'] == obesity_type]
+        plt.scatter(subset.index, subset[i], label=obesity_type)
+    plt.xlabel("Índice de datos")
+    plt.ylabel(i)
+    plt.legend(title='Tipo de Obesidad')
+    plt.title(f"Gráfico de Dispersión de {i} por Tipo de Obesidad")
+    plt.show()
+
+# Gráfico de violín por tipo de obesidad para todas las columnas numéricas
+plt.figure(figsize=(12, 8))
+for column in num_columns:
+    sns.violinplot(x='NObeyesdad', y=df[column], data=df)
+    plt.title(f"Gráfico de Violín para {column} por Tipo de Obesidad")
+    plt.xticks(rotation=45)
+    plt.show()
+
