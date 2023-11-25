@@ -7,9 +7,9 @@ warnings.filterwarnings("ignore")
 
 app = Flask(__name__) 
 print('Loading model and preprocessors')
-model = joblib.load("model_assets/modelo_random_forest.pkl")
-ohe = joblib.load("model_assets/ohe.pkl")
-mmscaler = joblib.load("model_assets/mmscaler.pkl")
+model = joblib.load("/home/ubuntu/Proyecto-DSA/api_proyecto/model_assets/modelo_random_forest.pkl")
+ohe = joblib.load("/home/ubuntu/Proyecto-DSA/api_proyecto/model_assets/ohe.pkl")
+mmscaler = joblib.load("/home/ubuntu/Proyecto-DSA/api_proyecto/model_assets/mmscaler.pkl")
 
 @app.route('/predict', methods=['POST']) 
 def predict(): 
@@ -42,5 +42,7 @@ def index():
     #return render_template('C:/Users/Juan/Downloads/api final final/templates/website.html')
 
 # Ejecutar la aplicación 
+#if __name__ == '__main__':
+#    app.run(debug=True)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
